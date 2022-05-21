@@ -1,6 +1,7 @@
 package Numbers;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Game {
     public static void main(String[] args) {
@@ -15,8 +16,19 @@ public class Game {
 
         boolean active = true;
 
+
         while(active)  {
-            userGuess.setUserGuess();
+
+            boolean repeat = true;
+            while (repeat) {
+                try {
+                    userGuess.setUserGuess();
+                    repeat = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input -- enter only integers");
+                }
+            }
+
             int guess = userGuess.getUserGuess();
 
             while (usedNumbers.contains(guess)) {
